@@ -1,5 +1,5 @@
 #include "http_conn.h"
-
+#include "heap_timer.h"
 /* 定义HTTP响应的一些状态信息 */
 const char* ok_200_title = "OK";
 const char* error_400_title = "Bad Request";
@@ -81,6 +81,7 @@ void http_conn::init() {
     m_write_idx = 0;
     m_string = 0;
     m_cgi_write_idx=0;
+    timer=nullptr;
     memset( m_read_buf, '\0', READ_BUFFER_SIZE );
     memset( m_write_buf, '\0', WRITE_BUFFER_SIZE );
     memset( m_real_file, '\0', FILENAME_LEN );
@@ -194,6 +195,8 @@ http_conn::HTTP_CODE http_conn::parse_headers( char* text ) {
         text += strspn( text, " \t" );
         if ( strcasecmp( text, "keep-alive" ) == 0 ) {
             m_linger = true;
+        }else{
+            m_linger = false;
         }
     }
     /* 处理Content-Length头部字段 */
@@ -425,6 +428,7 @@ bool http_conn::write() {
         unmap();
         if( m_linger ) {
             init();
+            m_linger=true;
             modfd( m_epollfd, m_sockfd, EPOLLIN );
             return true;
         } else {

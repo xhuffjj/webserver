@@ -24,6 +24,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+class heap_timer;
 class http_conn {
 public:
     /* 文件名的最大长度 */
@@ -88,11 +89,17 @@ public:
     static int m_epollfd;
     /* 统计用户数量 */
     static int m_user_count;
-
-private:
+    /* HTTP请求是否要保持连接 */
+    bool m_linger;
     /* 该HTTP连接的socket和对方的socket地址 */
     int m_sockfd;
     sockaddr_in m_address;
+    
+    /*绑定连接与定时器*/
+    heap_timer* timer;
+private:
+    
+    
 
     /* 读缓冲区 */
     char m_read_buf[ READ_BUFFER_SIZE ];
@@ -122,8 +129,7 @@ private:
     char* m_host;
     /* HTTP请求的消息体的长度 */
     int m_content_length;
-    /* HTTP请求是否要保持连接 */
-    bool m_linger;
+    
     /* 传递给CGI脚本的请求 */
     char* m_string; 
     /*CGI脚本的输出缓冲区*/
@@ -143,6 +149,7 @@ private:
     /* 我们将采用writev来执行写操作，所以定义下面两个成员，其中m_iv_count表示被写内存块的数量 */
     struct iovec m_iv[2];
     int m_iv_count;
+    
 };
 
 #endif
