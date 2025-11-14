@@ -33,7 +33,7 @@ public:
     static const int READ_BUFFER_SIZE = 2048;
     /* 写缓冲区的大小 */
     static const int WRITE_BUFFER_SIZE = 1024;
-    /* HTTP请求方法，但我们仅支持GET */
+    /* HTTP请求方法，但我们仅支持GET,POST */
     enum METHOD { GET = 0, POST, HEAD, PUT, DELETE, TRACE, OPTIONS, CONNECT, PATCH };
     /* 解析客户请求时，主状态机所处的状态（当前正在分析请求行，当前正在分析头部字段，当前正在分析请求体）*/
     enum CHECK_STATE { CHECK_STATE_REQUESTLINE = 0, CHECK_STATE_HEADER, CHECK_STATE_CONTENT };

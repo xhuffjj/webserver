@@ -46,7 +46,7 @@ void sig_handler( int sig )
 
 void timer_handler()
 {
-    printf("tick\n");
+    //printf("tick\n");
     /* 定时处理任务，实际上就是调用tick函数 */
     t_h.tick();
     /* 因为一次alarm调用只会引起一次SIGALRM信号，所以我们要重新定时，以不断触发SIGALRM信号 */
