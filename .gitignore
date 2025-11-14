@@ -1,0 +1,56 @@
+# 这是一个为 C++ 项目准备的 .gitignore 文件
+
+# 1. 编译产物
+#################################
+# 编译生成的可执行文件、目标文件、库文件等
+*.o
+*.obj
+*.out
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# 编译生成的目录 (CMake, Make 等)
+build/
+bin/
+obj/
+Debug/
+Release/
+
+# 2. IDE 和编辑器配置
+#################################
+# Visual Studio Code
+.vscode/
+
+# CLion
+.idea/
+
+# Visual Studio
+*.sln
+*.suo
+*.vcxproj*
+*.user
+
+# 3. 操作系统和常用工具生成的文件
+#################################
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Vim 临时文件
+*.swp
+*.swo
+
+# 4. 其他
+#################################
+# 日志文件
+*.log
+
+# 压缩包
+*.zip
+*.rar
+*.tar.gz
