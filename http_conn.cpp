@@ -271,6 +271,9 @@ http_conn::HTTP_CODE http_conn::process_read() {
             }
         }
     }
+    if(line_status == LINE_BAD) {
+        return BAD_REQUEST; 
+    }
     
     return NO_REQUEST;
 }
